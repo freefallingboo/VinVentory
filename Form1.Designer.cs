@@ -42,6 +42,7 @@
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outgoingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.altToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.etsyCostCalculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.byColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,7 +163,6 @@
             this.tableAdapterManager = new VinVentory.NicsInventory1DataSetTableAdapters.TableAdapterManager();
             this.secondaryItemsTableAdapter = new VinVentory.NicsInventory1DataSetTableAdapters.SecondaryItemsTableAdapter();
             this.stickersTableAdapter = new VinVentory.NicsInventory1DataSetTableAdapters.StickersTableAdapter();
-            this.altToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             colorIDLabel = new System.Windows.Forms.Label();
             fullSheetLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -287,9 +287,16 @@
             // outgoingToolStripMenuItem
             // 
             this.outgoingToolStripMenuItem.Name = "outgoingToolStripMenuItem";
-            this.outgoingToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.outgoingToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.outgoingToolStripMenuItem.Text = "Outgoing";
             this.outgoingToolStripMenuItem.Click += new System.EventHandler(this.outgoingToolStripMenuItem_Click);
+            // 
+            // altToolStripMenuItem
+            // 
+            this.altToolStripMenuItem.Name = "altToolStripMenuItem";
+            this.altToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.altToolStripMenuItem.Text = "Alt";
+            this.altToolStripMenuItem.Click += new System.EventHandler(this.altToolStripMenuItem_Click);
             // 
             // etsyCostCalculatorToolStripMenuItem
             // 
@@ -849,7 +856,11 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colorDataGridViewTextBoxColumn,
@@ -860,7 +871,6 @@
             this.totalSheetsDataGridViewTextBoxColumn,
             this.totalCostDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.vProductTotalsBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
@@ -1139,7 +1149,7 @@
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(792, 397);
             this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Scraps";
+            this.tabPage6.Text = "Shirts";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // tabPage8
@@ -1399,13 +1409,6 @@
             // stickersTableAdapter
             // 
             this.stickersTableAdapter.ClearBeforeFill = true;
-            // 
-            // altToolStripMenuItem
-            // 
-            this.altToolStripMenuItem.Name = "altToolStripMenuItem";
-            this.altToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.altToolStripMenuItem.Text = "Alt";
-            this.altToolStripMenuItem.Click += new System.EventHandler(this.altToolStripMenuItem_Click);
             // 
             // Form1
             // 

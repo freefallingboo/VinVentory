@@ -16,19 +16,30 @@ namespace VinVentory
         {
             InitializeComponent();
 
+            ShirtColorComboBox.DisplayMember = "Name";
+            ShirtColorComboBox.ValueMember = "ID";
+            ShirtColorComboBox.DataSource = DataLib.GetShirtColors();
+
+            ShirtSizeComboBox.DisplayMember = "Name";
+            ShirtSizeComboBox.ValueMember = "ID";
+            ShirtSizeComboBox.DataSource = DataLib.GetShirtSizes();
+
+            ShirtStyleComboBox.DisplayMember = "Name";
+            ShirtStyleComboBox.ValueMember = "ID";
+            ShirtStyleComboBox.DataSource = DataLib.GetShirtStyles();
+
             StickerDGVComboBox.DisplayMember = "Name";
             StickerDGVComboBox.ValueMember = "ID";
             StickerDGVComboBox.DataSource = DataLib.GetStickers();
 
-            VinylDGVColorCB.DisplayMember = "Color";
-            VinylDGVColorCB.ValueMember = "ProductID";
-            VinylDGVColorCB.DataSource = DataLib.GetVinyl();
+            VinylDGVColorCB.DisplayMember = "Color_type";
+            VinylDGVColorCB.ValueMember = "ProdID";
+            VinylDGVColorCB.DataSource = DataLib.GetVinylColors();
 
             OtherItemName.DisplayMember = "Name";
             OtherItemName.ValueMember = "ID";
             OtherItemName.DataSource = DataLib.GetOther();
 
-            this.StickerGridView.EditMode = DataGridViewEditMode.EditOnEnter;
             this.Load += new EventHandler(OutgoingOrderAlternate_Load);
 
             ItemsInOrderTBox.Text = "0";
@@ -43,22 +54,26 @@ namespace VinVentory
 
         private void StickerGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.StickerGridView.EditMode = DataGridViewEditMode.EditOnEnter;
-        }
-
-        private void StickerGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
-        {
-
+            StickerGridView.EditMode = DataGridViewEditMode.EditOnEnter;
         }
 
         private void VinylGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.VinylGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+            VinylGridView.EditMode = DataGridViewEditMode.EditOnEnter;
         }
 
         private void OtherGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.OtherGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+            OtherGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+        }
+
+        private void ShirtGridView_Click(object sender, EventArgs e)
+        {
+            ShirtGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+        }
+
+        private void ShirtGridView_Enter(object sender, EventArgs e)
+        {
         }
 
         private void VinylGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -74,7 +89,7 @@ namespace VinVentory
             if (e.Exception != null &&
                 e.Context == DataGridViewDataErrorContexts.Commit)
             {
-                MessageBox.Show("CustomerID value must be unique.");
+                MessageBox.Show("Something tried to change in the database?");
             }
         }
 
@@ -94,8 +109,11 @@ namespace VinVentory
         private void ClearButton_Click(object sender, EventArgs e)
         {
             VinylGridView.Rows.Clear();
+            ShirtGridView.Rows.Clear();
             StickerGridView.Rows.Clear();
             OtherGridView.Rows.Clear();
+            ItemsInOrderTBox.Text = "0";
+            PriceTBox.Text = "0";
         }
 
         private void Savebtn_Click(object sender, EventArgs e)
@@ -244,9 +262,13 @@ namespace VinVentory
             IncreaseItemsInOrder();
         }
 
+        private void ShirtGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            IncreaseItemsInOrder();
+        }
+
         private void StickerGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
-            //StickerGridView.Rows.Add(NameDGVComboBox, 1);
             IncreaseItemsInOrder();
         }
 
@@ -266,9 +288,37 @@ namespace VinVentory
             DecreaseItemsInOrder();
         }
 
+        private void ShirtGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            DecreaseItemsInOrder();
+        }
+
         private void StickerGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             DecreaseItemsInOrder();
         }
+
+        private void StickerGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            e.Row.Cells[1].Value = 1;
+        }
+
+        private void OtherGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            e.Row.Cells[1].Value = 1;
+        }
+
+        private void StickerGridView_Leave(object sender, EventArgs e)
+        {
+            //validate?
+            //if quantity > 1, update item count
+        }
+
+        private void ShirtGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            e.Row.Cells[3].Value = 1;
+        }
+
+
     }
 }

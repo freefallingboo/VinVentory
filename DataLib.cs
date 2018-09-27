@@ -15,6 +15,27 @@ namespace VinVentory
             return dbContext.V_OrderItems.Where(o => o.Order_Number == OrderID);
         }
 
+        public static IEnumerable<ShirtColor> GetShirtColors()
+        {
+            DataClasses1DataContext dbContext = new DataClasses1DataContext();
+
+            return dbContext.ShirtColors;
+        }
+
+        public static IEnumerable<ShirtSize> GetShirtSizes()
+        {
+            DataClasses1DataContext dbContext = new DataClasses1DataContext();
+
+            return dbContext.ShirtSizes;
+        }
+
+        public static IEnumerable<ShirtStyle> GetShirtStyles()
+        {
+            DataClasses1DataContext dbContext = new DataClasses1DataContext();
+
+            return dbContext.ShirtStyles;
+        }
+
         public static int GetStickerQuantitiy(int StickerID)
         {
             DataClasses1DataContext dbContext = new DataClasses1DataContext();
@@ -108,11 +129,11 @@ namespace VinVentory
             }
         }
 
-        public static IEnumerable<v_Product> GetVinyl()
+        public static IEnumerable<v_Color_Type> GetVinylColors()
         {
             DataClasses1DataContext dbContext = new DataClasses1DataContext();
 
-            return dbContext.v_Products.Where(v => (v.Full_Sheets + v._3_4_Sheets + v._1_2_Sheets + v._1_4_Sheets) > 0);
+            return dbContext.v_Color_Types;
         }
     }
 }
