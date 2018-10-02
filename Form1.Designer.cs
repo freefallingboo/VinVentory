@@ -66,9 +66,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label25 = new System.Windows.Forms.Label();
+            this.TotalStock651Lbl = new System.Windows.Forms.Label();
             this.vProductTotalsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label26 = new System.Windows.Forms.Label();
+            this.TotalQuant651Lbl = new System.Windows.Forms.Label();
             this.Quarter651Quant = new System.Windows.Forms.Label();
             this.ThreeQuart651Quant = new System.Windows.Forms.Label();
             this.Half651Quant = new System.Windows.Forms.Label();
@@ -295,8 +295,6 @@
             // 
             this.altToolStripMenuItem.Name = "altToolStripMenuItem";
             this.altToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
-            this.altToolStripMenuItem.Text = "Alt";
-            this.altToolStripMenuItem.Click += new System.EventHandler(this.altToolStripMenuItem_Click);
             // 
             // etsyCostCalculatorToolStripMenuItem
             // 
@@ -372,7 +370,7 @@
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.Colorpicker);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Name = "651tabPage";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(792, 397);
             this.tabPage1.TabIndex = 0;
@@ -501,8 +499,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.label26);
+            this.groupBox1.Controls.Add(this.TotalStock651Lbl);
+            this.groupBox1.Controls.Add(this.TotalQuant651Lbl);
             this.groupBox1.Controls.Add(this.Quarter651Quant);
             this.groupBox1.Controls.Add(this.ThreeQuart651Quant);
             this.groupBox1.Controls.Add(this.Half651Quant);
@@ -520,28 +518,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Current";
             // 
-            // label25
+            // TotalStock651Lbl
             // 
-            this.label25.AutoSize = true;
-            this.label25.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vProductTotalsBindingSource, "Total cost", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "0", "C2"));
-            this.label25.Location = new System.Drawing.Point(124, 240);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(0, 17);
-            this.label25.TabIndex = 34;
+            this.TotalStock651Lbl.AutoSize = true;
+            this.TotalStock651Lbl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vProductTotalsBindingSource, "Total cost", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "0", "C2"));
+            this.TotalStock651Lbl.Location = new System.Drawing.Point(124, 240);
+            this.TotalStock651Lbl.Name = "TotalStock651Lbl";
+            this.TotalStock651Lbl.Size = new System.Drawing.Size(0, 17);
+            this.TotalStock651Lbl.TabIndex = 34;
             // 
             // vProductTotalsBindingSource
             // 
             this.vProductTotalsBindingSource.DataMember = "v_ProductTotals";
             this.vProductTotalsBindingSource.DataSource = this.nicsInventory1DataSet;
             // 
-            // label26
+            // TotalQuant651Lbl
             // 
-            this.label26.AutoSize = true;
-            this.label26.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vProductTotalsBindingSource, "Total Sheets", true));
-            this.label26.Location = new System.Drawing.Point(124, 204);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(0, 17);
-            this.label26.TabIndex = 33;
+            this.TotalQuant651Lbl.AutoSize = true;
+            this.TotalQuant651Lbl.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vProductTotalsBindingSource, "Total Sheets", true));
+            this.TotalQuant651Lbl.Location = new System.Drawing.Point(124, 204);
+            this.TotalQuant651Lbl.Name = "TotalQuant651Lbl";
+            this.TotalQuant651Lbl.Size = new System.Drawing.Size(0, 17);
+            this.TotalQuant651Lbl.TabIndex = 33;
             // 
             // Quarter651Quant
             // 
@@ -642,6 +640,7 @@
             this.Colorpicker.Name = "Colorpicker";
             this.Colorpicker.Size = new System.Drawing.Size(214, 24);
             this.Colorpicker.TabIndex = 12;
+            this.Colorpicker.SelectedIndexChanged += new System.EventHandler(this.Colorpicker_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -1530,8 +1529,8 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label TotalStock651Lbl;
+        private System.Windows.Forms.Label TotalQuant651Lbl;
         private System.Windows.Forms.Label Quarter651Quant;
         private System.Windows.Forms.Label ThreeQuart651Quant;
         private System.Windows.Forms.Label Half651Quant;
