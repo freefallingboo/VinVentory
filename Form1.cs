@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,10 @@ namespace VinVentory
         }
 
         private DataClasses1DataContext db = new DataClasses1DataContext();
-        private string VinylType = "651";
+        private string vinylType = "651";
         private int stickerID = 1;
         private int vinylID = 1;
+        CultureInfo ci = new CultureInfo("en-us");
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -44,23 +46,24 @@ namespace VinVentory
             Colorpicker.DisplayMember = "Name";
             Colorpicker.ValueMember = "ID";
 
-
-
+            int.TryParse(Colorpicker.SelectedValue.ToString(), out int colorID);
+            UpdateLabels(colorID);
 
         }
 
         private void Colorpicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var ProdRow = from p in db.v_Products
-                          where p.Color == Colorpicker.SelectedText && p.Vinyl_Type == VinylType
-                          select p;
-            //FullSheet651quant.Text = FullSheetQuantity(VinylType, Colorpicker.DisplayMember.ToString());
-            FullSheet651quant.DataBindings.Add("Text", ProdRow, "FullSheet");
+            int.TryParse(Colorpicker.SelectedValue.ToString(), out int colorID);
+
+            if (colorID > 0)
+            {
+                UpdateLabels(colorID);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void incomingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,8 +107,8 @@ namespace VinVentory
         private string FullSheetQuantity(string VinylType, string Color)
         {
             return ((from p in db.v_Products
-                    where p.Color == Color && p.Vinyl_Type == VinylType
-                    select p.Full_Sheets).FirstOrDefault()).ToString();
+                     where p.Color == Color && p.Vinyl_Type == VinylType
+                     select p.Full_Sheets).FirstOrDefault()).ToString();
         }
 
         private void groupBox5_Enter(object sender, EventArgs e)
@@ -153,7 +156,7 @@ namespace VinVentory
                 stickerAddTextBox.Text = "0";
                 return;
             }
-            
+
             Sticker sticker = new Sticker();
             bool result = sticker.AddSticker(stickerID, Quantity);
 
@@ -194,10 +197,19 @@ namespace VinVentory
             NF.Show();
         }
 
-        private void altToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UpdateLabels(Int64 ColorID)
         {
-            OutgoingOrderAlternate outgoingOrderAlternate = new OutgoingOrderAlternate();
-            outgoingOrderAlternate.Show();
+            Product vinyl = new Product();
+            vinyl = Product.GetProduct(ColorID, vinylType); // TO DO: enum for vinyl types? get tab name?
+            FullSheet651quant.Text = vinyl.FullSheet.ToString();
+            ThreeQuart651Quant.Text = vinyl.ThreeQuarterSheet.ToString();
+            Half651Quant.Text = vinyl.HalfSheet.ToString();
+            Quarter651Quant.Text = vinyl.QuarterSheet.ToString();
+
+            double totalQuantity = Product.GetProductTotal(vinyl);
+            TotalQuant651Lbl.Text = totalQuantity.ToString();
+            decimal? totalStock = ((decimal)totalQuantity / vinyl.CostperSqFt);
+            TotalStock651Lbl.Text = ((decimal)totalStock).ToString("C", ci);
         }
     }
 }
