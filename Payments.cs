@@ -8,20 +8,20 @@ namespace VinVentory
 {
     class Payments
     {
-        private decimal listedPrice;
-        private decimal listedShipping;
-        private decimal customerPaid;
-        private int itemsInOrder;
-        private decimal listingFee;
+        public decimal listedPrice;
+        public decimal listedShipping;
+        public decimal customerPaid;
+        public int itemsInOrder;
+        public decimal listingFee;
         private static decimal listingItemFee = .20m;
         private static decimal commissionFeeRate = .05m;
-        private decimal commissionFee;
+        public decimal commissionFee;
         private static decimal paymentFeeRate = .03m;
-        private decimal paymentFee;
+        public decimal paymentFee;
         private static decimal transactionFee = 0.25m;
-        private decimal profitBeforeShipping;
-        private decimal actualShipping;
-        private decimal profit;
+        public decimal profitBeforeShipping;
+        public decimal actualShipping;
+        public decimal profit;
 
         public Payments(decimal listPrice, decimal listShipping, decimal custPaid, int itemCount)
         {
@@ -41,15 +41,13 @@ namespace VinVentory
             this.actualShipping = actualShip;
         }
 
-        public Payments ComputeEtsyFees(Payments payment)
+        public static void ComputeEtsyFees(Payments payment)
         {
             payment.listingFee = GetEtsyListingFee(payment.itemsInOrder);
             payment.commissionFee = GetEtsyCommisionFee(payment.customerPaid);
             payment.paymentFee = GetEtsyPaymentFee(payment.customerPaid);
             payment.profitBeforeShipping = payment.customerPaid - payment.commissionFee - payment.listingFee - payment.paymentFee;
             payment.profit = payment.profitBeforeShipping - payment.actualShipping;
-
-            return payment;
         }
 
         public static decimal GetEtsyCommisionFee(decimal customerPaid)
@@ -67,7 +65,7 @@ namespace VinVentory
             return customerPaid * paymentFeeRate + transactionFee;
         }
 
-        public decimal GetTotalEtsyFees(Payments payment)
+        public static decimal GetTotalEtsyFees(Payments payment)
         {
             return payment.listingFee + payment.commissionFee + payment.paymentFee;
         }
