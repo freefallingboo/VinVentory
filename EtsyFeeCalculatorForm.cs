@@ -18,6 +18,8 @@ namespace VinVentory
         public EtsyFeeCalculatorForm()
         {
             InitializeComponent();
+
+            SavedFeeDGV.DataSource = DataLib.GetEtsyFees();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -33,7 +35,7 @@ namespace VinVentory
         private void button1_Click(object sender, EventArgs e)
         {
 
-            foreach (DataGridViewRow Row in dataGridView1.Rows)
+            foreach (DataGridViewRow Row in FeeEntryDGV.Rows)
             {
                 if (Row.Cells[0].Value != null)
                 {
@@ -87,6 +89,25 @@ namespace VinVentory
         private void EtsyFeeCalculatorForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<Product> productsInOrder = new List<Product>();
+            foreach (DataGridViewRow Row in FeeEntryDGV.Rows)
+            {
+                if (Row.Cells[10].Value != null)
+                {
+                    //This isn't working, I think because it can't convert the cells with $ so I'll need to sanitize ahead of time
+                    EtsyFees.AddFee(Convert.ToDecimal(Row.Cells[0].Value), Convert.ToDecimal(Row.Cells[1].Value), Convert.ToDecimal(Row.Cells[2].Value),
+                        Convert.ToDecimal(Row.Cells[3].Value), Convert.ToInt32(Row.Cells[4].Value), Convert.ToDecimal(Row.Cells[5].Value), 
+                        Convert.ToDecimal(Row.Cells[6].Value), Convert.ToDecimal(Row.Cells[7].Value), Convert.ToDecimal(Row.Cells[8].Value), 
+                        Convert.ToDecimal(Row.Cells[9].Value), Convert.ToDecimal(Row.Cells[10].Value));
+                }
+            }
+
+            FeeEntryDGV.Rows.Clear();
+            SavedFeeDGV.DataSource = DataLib.GetEtsyFees();
         }
     }
 }
