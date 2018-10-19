@@ -41,8 +41,15 @@ namespace VinVentory
                 {
                     if (Row.Cells[1].Value == null)
                     {
-                        MessageBox.Show("Please enter the listing's shipping cost");
-                        return;
+                        if (Row.Cells[0].Value != null && Row.Cells[2].Value != null)
+                        {
+                            Row.Cells[1].Value = Convert.ToDecimal(Row.Cells[2].Value) - Convert.ToDecimal(Row.Cells[0].Value);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter the listing's shipping cost");
+                            return;
+                        }
                     }
 
                     if (Row.Cells[2].Value == null)
@@ -51,7 +58,7 @@ namespace VinVentory
                         return;
                     }
 
-                    if (Row.Cells[4].Value == null)
+                    if (Row.Cells[3].Value == null)
                     {
                         MessageBox.Show("Please enter the number of items");
                         return;
@@ -64,12 +71,12 @@ namespace VinVentory
 
                     Payments payment = new Payments(Convert.ToDecimal(Row.Cells[0].Value),
                         Convert.ToDecimal(Row.Cells[1].Value), Convert.ToDecimal(Row.Cells[2].Value),
-                        Convert.ToInt32(Row.Cells[4].Value), Convert.ToDecimal(Row.Cells[9].Value));
+                        Convert.ToInt32(Row.Cells[3].Value), Convert.ToDecimal(Row.Cells[9].Value));
 
                     Payments.ComputeEtsyFees(payment);
 
                     //fill out the empty cells:
-                    Row.Cells[3].Value = payment.commissionFee.ToString("C", ci);
+                    Row.Cells[4].Value = payment.commissionFee.ToString("C", ci);
                     Row.Cells[5].Value = payment.listingFee.ToString("C", ci);
                     Row.Cells[6].Value = payment.paymentFee.ToString("C", ci);
 
@@ -93,16 +100,33 @@ namespace VinVentory
 
         private void button3_Click(object sender, EventArgs e)
         {
+            System.Globalization.NumberStyles ns = (System.Globalization.NumberStyles.Currency);
             List<Product> productsInOrder = new List<Product>();
             foreach (DataGridViewRow Row in FeeEntryDGV.Rows)
             {
                 if (Row.Cells[10].Value != null)
                 {
-                    //This isn't working, I think because it can't convert the cells with $ so I'll need to sanitize ahead of time
+                    string commision = Row.Cells[4].Value.ToString();
+                    decimal commisionNum = decimal.Parse(commision, ns);
+
+                    string etsyFee = Row.Cells[5].Value.ToString();
+                    decimal etsyFeeNum = decimal.Parse(etsyFee, ns);
+
+                    string paymentFee = Row.Cells[6].Value.ToString();
+                    decimal paymentFeeNum = decimal.Parse(paymentFee, ns);
+
+                    string totalFees = Row.Cells[7].Value.ToString();
+                    decimal totalFeesNum = decimal.Parse(totalFees, ns);
+
+                    string profitBeforeShipping = Row.Cells[8].Value.ToString();
+                    decimal profitBeforeShippingNum = decimal.Parse(profitBeforeShipping, ns);
+
+                    string totalProfit = Row.Cells[10].Value.ToString();
+                    decimal totalProfitNum = decimal.Parse(totalProfit, ns);
+
                     EtsyFees.AddFee(Convert.ToDecimal(Row.Cells[0].Value), Convert.ToDecimal(Row.Cells[1].Value), Convert.ToDecimal(Row.Cells[2].Value),
-                        Convert.ToDecimal(Row.Cells[3].Value), Convert.ToInt32(Row.Cells[4].Value), Convert.ToDecimal(Row.Cells[5].Value), 
-                        Convert.ToDecimal(Row.Cells[6].Value), Convert.ToDecimal(Row.Cells[7].Value), Convert.ToDecimal(Row.Cells[8].Value), 
-                        Convert.ToDecimal(Row.Cells[9].Value), Convert.ToDecimal(Row.Cells[10].Value));
+                        Convert.ToInt32(Row.Cells[3].Value), commisionNum, etsyFeeNum, paymentFeeNum, totalFeesNum,
+                        profitBeforeShippingNum, Convert.ToDecimal(Row.Cells[9].Value), totalProfitNum);
                 }
             }
 

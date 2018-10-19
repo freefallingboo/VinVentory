@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.FeeEntryDGV = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
@@ -46,8 +46,8 @@
             this.ListPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShippingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Payment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Commision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Items = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Commision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EtsyFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PmtFee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalFees = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,8 +76,8 @@
             this.ListPrice,
             this.ShippingPrice,
             this.Payment,
-            this.Commision,
             this.Items,
+            this.Commision,
             this.EtsyFee,
             this.PmtFee,
             this.TotalFees,
@@ -134,9 +134,9 @@
             // 
             // ListPrice
             // 
-            dataGridViewCellStyle10.Format = "C2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.ListPrice.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.ListPrice.DefaultCellStyle = dataGridViewCellStyle1;
             this.ListPrice.HeaderText = "Listed Price";
             this.ListPrice.MaxInputLength = 20;
             this.ListPrice.Name = "ListPrice";
@@ -144,30 +144,21 @@
             // 
             // ShippingPrice
             // 
-            dataGridViewCellStyle11.Format = "C2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.ShippingPrice.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.ShippingPrice.DefaultCellStyle = dataGridViewCellStyle2;
             this.ShippingPrice.HeaderText = "Listed Shipping";
             this.ShippingPrice.Name = "ShippingPrice";
             this.ShippingPrice.Width = 123;
             // 
             // Payment
             // 
-            dataGridViewCellStyle12.Format = "C2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.Payment.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Payment.DefaultCellStyle = dataGridViewCellStyle3;
             this.Payment.HeaderText = "Total Payment";
             this.Payment.Name = "Payment";
             this.Payment.Width = 118;
-            // 
-            // Commision
-            // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Commision.DefaultCellStyle = dataGridViewCellStyle13;
-            this.Commision.HeaderText = "Commision";
-            this.Commision.Name = "Commision";
-            this.Commision.ReadOnly = true;
-            this.Commision.Width = 105;
             // 
             // Items
             // 
@@ -175,22 +166,31 @@
             this.Items.Name = "Items";
             this.Items.Width = 70;
             // 
+            // Commision
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Commision.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Commision.HeaderText = "Commision";
+            this.Commision.Name = "Commision";
+            this.Commision.ReadOnly = true;
+            this.Commision.Width = 105;
+            // 
             // EtsyFee
             // 
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle14.Format = "C2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.EtsyFee.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.EtsyFee.DefaultCellStyle = dataGridViewCellStyle5;
             this.EtsyFee.HeaderText = "EtsyFee";
             this.EtsyFee.Name = "EtsyFee";
             this.EtsyFee.Width = 88;
             // 
             // PmtFee
             // 
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.PmtFee.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.PmtFee.DefaultCellStyle = dataGridViewCellStyle6;
             this.PmtFee.HeaderText = "Payment Fee";
             this.PmtFee.Name = "PmtFee";
             this.PmtFee.ReadOnly = true;
@@ -198,10 +198,10 @@
             // 
             // TotalFees
             // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle16.Format = "C2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.TotalFees.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.TotalFees.DefaultCellStyle = dataGridViewCellStyle7;
             this.TotalFees.HeaderText = "Total Fees";
             this.TotalFees.Name = "TotalFees";
             this.TotalFees.ReadOnly = true;
@@ -209,10 +209,10 @@
             // 
             // PriceBFShip
             // 
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle17.Format = "C2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.PriceBFShip.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.PriceBFShip.DefaultCellStyle = dataGridViewCellStyle8;
             this.PriceBFShip.HeaderText = "Profit Before Shipping";
             this.PriceBFShip.Name = "PriceBFShip";
             this.PriceBFShip.ReadOnly = true;
@@ -226,8 +226,8 @@
             // 
             // Profit
             // 
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Profit.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Profit.DefaultCellStyle = dataGridViewCellStyle9;
             this.Profit.HeaderText = "Profit";
             this.Profit.Name = "Profit";
             this.Profit.ReadOnly = true;
@@ -260,17 +260,17 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView SavedFeeDGV;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ListPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShippingPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Payment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Commision;
         private System.Windows.Forms.DataGridViewTextBoxColumn Items;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Commision;
         private System.Windows.Forms.DataGridViewTextBoxColumn EtsyFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn PmtFee;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalFees;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceBFShip;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShippingCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Profit;
-        private System.Windows.Forms.Label label1;
     }
 }

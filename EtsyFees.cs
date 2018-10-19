@@ -8,7 +8,7 @@ namespace VinVentory
 {
     partial class EtsyFees
     {
-        public static void AddFee(decimal listedPrice, decimal listedShipping, decimal totalPayment, decimal commision, int items, decimal etsyFee, decimal paymentFee,
+        public static void AddFee(decimal listedPrice, decimal listedShipping, decimal totalPayment, int items, decimal commision, decimal etsyFee, decimal paymentFee,
             decimal totalFees, decimal profitBeforeShipping, decimal actualShipping, decimal totalProfit)
         {
             DataClasses1DataContext dbContext = new DataClasses1DataContext();
