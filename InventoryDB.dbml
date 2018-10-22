@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NicsInventory1" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLExpress;Initial Catalog=NicsInventory1;Integrated Security=True" SettingsObjectName="VinVentory.Properties.Settings" SettingsPropertyName="NicsInventory1ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Colors" Member="Colors">
+    <Type Name="Color">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="ColorNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Color_Vinyl" Member="Vinyls" ThisKey="ID" OtherKey="ColorID" Type="Vinyl" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OrderPrice" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Association Name="Order_MailerOrderItem" Member="MailerOrderItems" ThisKey="ID" OtherKey="OrderID" Type="MailerOrderItem" />
+      <Association Name="Order_SecondaryOrderItem" Member="SecondaryOrderItems" ThisKey="ID" OtherKey="OrderID" Type="SecondaryOrderItem" />
+      <Association Name="Order_StickerOrderItem" Member="StickerOrderItems" ThisKey="ID" OtherKey="OrderID" Type="StickerOrderItem" />
+      <Association Name="Order_VinylOrderItem" Member="VinylOrderItems" ThisKey="ID" OtherKey="OrderID" Type="VinylOrderItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EtsyFees" Member="EtsyFees">
+    <Type Name="EtsyFee">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ListedPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ListedShipping" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TotalPayment" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Commision" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Items" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentFee" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalFees" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ProfitBeforeShipping" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ActualShipping" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TotalProfit" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MailerOrderItems" Member="MailerOrderItems">
+    <Type Name="MailerOrderItem">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="MailerID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Order_MailerOrderItem" Member="Order" ThisKey="OrderID" OtherKey="ID" Type="Order" IsForeignKey="true" />
+      <Association Name="Mailer_MailerOrderItem" Member="Mailer" ThisKey="MailerID" OtherKey="ID" Type="Mailer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Mailers" Member="Mailers">
+    <Type Name="Mailer">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="NotificationLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="Mailer_MailerOrderItem" Member="MailerOrderItems" ThisKey="ID" OtherKey="MailerID" Type="MailerOrderItem" />
+      <Association Name="Supplier_Mailer" Member="Supplier" ThisKey="SupplierID" OtherKey="ID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecondaryItems" Member="SecondaryItems">
+    <Type Name="SecondaryItem">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="NotificationLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ApplicationKit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Mailer" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="SecondaryItem_SecondaryOrderItem" Member="SecondaryOrderItems" ThisKey="ID" OtherKey="SecondaryID" Type="SecondaryOrderItem" />
+      <Association Name="Supplier_SecondaryItem" Member="Supplier" ThisKey="SupplierID" OtherKey="ID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VinylType" Member="VinylTypes">
+    <Type Name="VinylType">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TypeName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="VinylType_Vinyl" Member="Vinyls" ThisKey="ID" OtherKey="VinylType" Type="Vinyl" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SecondaryOrderItems" Member="SecondaryOrderItems">
+    <Type Name="SecondaryOrderItem">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SecondaryID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_SecondaryOrderItem" Member="Order" ThisKey="OrderID" OtherKey="ID" Type="Order" IsForeignKey="true" />
+      <Association Name="SecondaryItem_SecondaryOrderItem" Member="SecondaryItem" ThisKey="SecondaryID" OtherKey="ID" Type="SecondaryItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShirtColors" Member="ShirtColors">
+    <Type Name="ShirtColor">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Association Name="ShirtColor_Shirt" Member="Shirts" ThisKey="ID" OtherKey="ColorID" Type="Shirt" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shirts" Member="Shirts">
+    <Type Name="Shirt">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ColorID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="StyleID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SizeID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="ShirtColor_Shirt" Member="ShirtColor" ThisKey="ColorID" OtherKey="ID" Type="ShirtColor" IsForeignKey="true" />
+      <Association Name="ShirtSize_Shirt" Member="ShirtSize" ThisKey="SizeID" OtherKey="ID" Type="ShirtSize" IsForeignKey="true" />
+      <Association Name="ShirtStyle_Shirt" Member="ShirtStyle" ThisKey="StyleID" OtherKey="ID" Type="ShirtStyle" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShirtSizes" Member="ShirtSizes">
+    <Type Name="ShirtSize">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Association Name="ShirtSize_Shirt" Member="Shirts" ThisKey="ID" OtherKey="SizeID" Type="Shirt" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShirtStyles" Member="ShirtStyles">
+    <Type Name="ShirtStyle">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Association Name="ShirtStyle_Shirt" Member="Shirts" ThisKey="ID" OtherKey="StyleID" Type="Shirt" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StickerOrderItems" Member="StickerOrderItems">
+    <Type Name="StickerOrderItem">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="StickerID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Order_StickerOrderItem" Member="Order" ThisKey="OrderID" OtherKey="ID" Type="Order" IsForeignKey="true" />
+      <Association Name="Sticker_StickerOrderItem" Member="Sticker" ThisKey="StickerID" OtherKey="ID" Type="Sticker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stickers" Member="Stickers">
+    <Type Name="Sticker">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="NotificationLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="Sticker_StickerOrderItem" Member="StickerOrderItems" ThisKey="ID" OtherKey="StickerID" Type="StickerOrderItem" />
+      <Association Name="Supplier_Sticker" Member="Supplier" ThisKey="SupplierID" OtherKey="ID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Supplier" Member="Suppliers">
+    <Type Name="Supplier">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemLink" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Association Name="Supplier_Mailer" Member="Mailers" ThisKey="ID" OtherKey="SupplierID" Type="Mailer" />
+      <Association Name="Supplier_SecondaryItem" Member="SecondaryItems" ThisKey="ID" OtherKey="SupplierID" Type="SecondaryItem" />
+      <Association Name="Supplier_Sticker" Member="Stickers" ThisKey="ID" OtherKey="SupplierID" Type="Sticker" />
+      <Association Name="Supplier_Vinyl" Member="Vinyls" ThisKey="ID" OtherKey="SupplierID" Type="Vinyl" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vinyl" Member="Vinyls">
+    <Type Name="Vinyl">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ColorID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="FullSheet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ThreeQuarterSheet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HalfSheet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="QuarterSheet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CostperSqFt" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="NotificationLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VinylType" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="Color_Vinyl" Member="Color" ThisKey="ColorID" OtherKey="ID" Type="Color" IsForeignKey="true" />
+      <Association Name="Supplier_Vinyl" Member="Supplier" ThisKey="SupplierID" OtherKey="ID" Type="Supplier" IsForeignKey="true" />
+      <Association Name="VinylType_Vinyl" Member="VinylType1" ThisKey="VinylType" OtherKey="ID" Type="VinylType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VinylOrderItems" Member="VinylOrderItems">
+    <Type Name="VinylOrderItem">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ProductID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_VinylOrderItem" Member="Order" ThisKey="OrderID" OtherKey="ID" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_AllQuantities" Member="V_AllQuantities">
+    <Type Name="V_AllQuantity">
+      <Column Name="[Table]" Member="Table" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotificationLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Stock" Type="System.Decimal" DbType="Decimal(21,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_VinylStock" Member="v_VinylStocks">
+    <Type Name="v_VinylStock">
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(38,4)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_Color_Type" Member="v_Color_Types">
+    <Type Name="v_Color_Type">
+      <Column Name="ProdID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Color_type" Type="System.String" DbType="VarChar(290)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_NeedToOrder" Member="V_NeedToOrders">
+    <Type Name="V_NeedToOrder">
+      <Column Name="[Table]" Member="Table" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotificationLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Supplier" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="ItemLink" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_OrderItems" Member="V_OrderItems">
+    <Type Name="V_OrderItem">
+      <Column Name="[Order Number]" Member="Order_Number" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="[Item ID]" Member="Item_ID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="[Item Name]" Member="Item_Name" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(12,2)" CanBeNull="true" />
+      <Column Name="[Material Cost]" Member="Material_Cost" Type="System.Decimal" DbType="Decimal(23,4)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_Products" Member="v_Products">
+    <Type Name="v_Product">
+      <Column Name="Color" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="[Full Sheets]" Member="Full_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[3/4 Sheets]" Member="_3_4_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[1/2 Sheets]" Member="_1_2_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[1/4 Sheets]" Member="_1_4_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Vinyl Type]" Member="Vinyl_Type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ProductID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_ProductTotals" Member="v_ProductTotals">
+    <Type Name="v_ProductTotal">
+      <Column Name="Color" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="[Full Sheets]" Member="Full_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[3/4 Sheets]" Member="_3_4_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[1/2 Sheets]" Member="_1_2_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[1/4 Sheets]" Member="_1_4_Sheets" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Total Sheets]" Member="Total_Sheets" Type="System.Decimal" DbType="Decimal(16,2)" CanBeNull="true" />
+      <Column Name="[Total cost]" Member="Total_cost" Type="System.Decimal" DbType="Decimal(22,4)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_TotalStock" Member="v_TotalStocks">
+    <Type Name="v_TotalStock">
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
